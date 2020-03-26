@@ -8,7 +8,7 @@ module Wanikani
 
       def perform
         persist_aggregate
-        #persist_vocabulary
+        persist_vocabulary
       end
 
       def persist_aggregate
@@ -34,22 +34,21 @@ module Wanikani
       end
 
       def persist_vocabulary
-        puts radicals_list.reject{ |item| item['user_specific'].nil?  }.count
-        puts kanji_list.reject{ |item| item['user_specific'].nil?  }.count
-        vocabulary_list.reject{ |item| item['user_specific'].nil?  }.each do |item|
-          vocabulary_worksheet.set_row(vocabulary)
+        all_active_vocabulary.each_with_index do |item, index|
+          vocabulary = Vocabulary.new(item.fetch('type', ''), item['character'], item['kana'], item['meaning'])
+          vocabulary_worksheet.set_row(index + 2, vocabulary)
         end
         vocabulary_worksheet.save
       end
 
       def aggregate_worksheet
         @aggregate_worksheet ||=
-          Spreadsheet::Worksheet.new(spreadsheet_service.worksheet_by_index(0))
+          Spreadsheet::Worksheet.new(spreadsheet_service.worksheet_by_title('Raw'))
       end
 
       def vocabulary_worksheet
         @vocabulary_worksheet ||=
-          Spreadsheet::Worksheet.new(spreadsheet_service.worksheet_by_index(1))
+          Spreadsheet::Worksheet.new(spreadsheet_service.worksheet_by_title('Vocabulary'))
       end
 
       def spreadsheet_service
@@ -84,12 +83,29 @@ module Wanikani
         @radicals_list ||= client.radicals_list
       end
 
+      def active_radicals_list
+        radicals_list.reject{ |item| item['user_specific'].nil?  }
+      end
+
       def kanji_list
         @kanji_list ||= client.kanji_list
       end
 
+      def active_kanji_list
+        kanji_list.reject{ |item| item['user_specific'].nil?  }
+      end
+
       def vocabulary_list
         @vocabulary_list ||= client.vocabulary_list
+      end
+
+      def active_vocabulary_list
+        vocabulary_list.reject{ |item| item['user_specific'].nil?  }
+      end
+
+      def all_active_vocabulary
+        #active_radicals_list.merge(active_kanji_list).merge(active_vocabulary_list)
+        active_radicals_list + active_kanji_list + active_vocabulary_list
       end
     end
   end

@@ -13,8 +13,8 @@ module Wanikani
           @spreadsheet_id = spreadsheet_id
         end
 
-        def worksheet_by_index(worksheet_id)
-          @worksheet ||= spreadsheet.worksheets[worksheet_id]
+        def worksheet_by_title(worksheet_title)
+          spreadsheet.worksheet_by_title(worksheet_title)
         end
 
         def spreadsheet
