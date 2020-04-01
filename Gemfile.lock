@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:Dahie/wanikani-gem.git
+  revision: 30fe1d04f6b08b99cddfabc81dc206d05ae069e1
+  branch: api-version-2
+  specs:
+    wanikani (2.0.0)
+      faraday (~> 0.12)
+      faraday_middleware (~> 0.12)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -55,9 +64,6 @@ GEM
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
     uber (0.1.0)
-    wanikani (2.0.0)
-      faraday (~> 0.12)
-      faraday_middleware (~> 0.12)
 
 PLATFORMS
   ruby
@@ -65,7 +71,7 @@ PLATFORMS
 DEPENDENCIES
   google_drive
   irb
-  wanikani
+  wanikani!
 
 BUNDLED WITH
    1.17.3
