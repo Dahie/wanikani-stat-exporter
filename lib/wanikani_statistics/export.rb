@@ -12,12 +12,18 @@ module WanikaniStatistics
 
     def perform
       AggregatePersistor.new(aggregate_worksheet).perform
+      KanjiPersistor.new(kanji_worksheet).perform
       VocabularyPersistor.new(vocabulary_worksheet).perform
     end
 
     def aggregate_worksheet
       @aggregate_worksheet ||=
         Spreadsheet::Worksheet.new(spreadsheet_service.worksheet_by_title('Raw'))
+    end
+
+    def kanji_worksheet
+      @kanji_worksheet ||=
+        Spreadsheet::Worksheet.new(spreadsheet_service.worksheet_by_title('Kanji'))
     end
 
     def vocabulary_worksheet
