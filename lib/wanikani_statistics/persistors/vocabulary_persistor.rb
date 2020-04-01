@@ -1,5 +1,5 @@
 module WanikaniStatistics
-  class VocabularyPersistory
+  class VocabularyPersistor
     attr_reader :worksheet
 
     def initialize(worksheet)
@@ -10,9 +10,9 @@ module WanikaniStatistics
       vocabulary.each_with_index do |subject, index|
         vocabulary = Vocabulary.new(subject.dig('object'),
                                     subject.dig('data', 'characters'),
-                                    subject.dig('data', 'kana'),
+                                    subject.dig('data', 'readings').first['reading'],
                                     subject.dig('data', 'meanings').first['meaning'])
-        vocabulary_worksheet.set_row(index + 2, vocabulary)
+        worksheet.set_row(index + 2, vocabulary)
       end
       worksheet.save
     end

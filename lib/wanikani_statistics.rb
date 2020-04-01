@@ -2,6 +2,7 @@
 
 require 'wanikani'
 
+require './lib/wanikani_statistics/version'
 require './lib/wanikani_statistics/export'
 require './lib/wanikani_statistics/models/aggregate'
 require './lib/wanikani_statistics/models/kanji'
