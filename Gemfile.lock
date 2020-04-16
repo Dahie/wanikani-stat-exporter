@@ -1,7 +1,7 @@
 GIT
   remote: git@github.com:Dahie/wanikani-gem.git
-  revision: 30fe1d04f6b08b99cddfabc81dc206d05ae069e1
-  branch: api-version-2
+  revision: 96691e28f092d7fd228f389e502729a9c057e56d
+  branch: gem-v3
   specs:
     wanikani (2.0.0)
       faraday (~> 0.12)

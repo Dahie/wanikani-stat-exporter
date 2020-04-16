@@ -8,5 +8,5 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem 'irb', require: false
 
 gem 'google_drive'
-gem 'wanikani', git: 'git@github.com:Dahie/wanikani-gem.git', branch: 'api-version-2'
+gem 'wanikani', git: 'git@github.com:Dahie/wanikani-gem.git', branch: 'gem-v3'
 

@@ -2,8 +2,7 @@ module WanikaniStatistics
   class Export
     def initialize
       Wanikani.configure do |config|
-        config.api_key = "71b78e92-2222-45b9-b196d0050c13d247"
-        config.api_version = "v2"
+        config.api_key = ENV['WANIKANI_API_KEY']
       end
 
       response = Wanikani::Subject.find_by
