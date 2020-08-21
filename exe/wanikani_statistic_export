@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/wanikani_statistics.rb'
+
+WanikaniStatistics::Export.new.perform

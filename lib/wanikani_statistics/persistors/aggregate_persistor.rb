@@ -44,6 +44,21 @@ module WanikaniStatistics
       @assignments ||= Wanikani::Assignment.find_by(started: true).data
     end
 
+    def map_stage_to_progression_names(stage)
+      {
+        0 => 'Unlocked',
+        1 => 'Apprentice',
+        2 => 'Apprentice',
+        3 => 'Master',
+        4 => 'Master',
+        5 => 'Guru',
+        6 => 'Guru',
+        7 => 'Enlightened',
+        8 => 'Enlightened',
+        9 => 'Burned'
+      }.fetch(stage)
+    end
+
     def distribution
       return @distribution unless @distribution.nil?
 
@@ -55,7 +70,7 @@ module WanikaniStatistics
       end
 
       assignments.each do |assignment|
-        stage = assignment.dig('data', 'srs_stage_name').split.first
+        stage = map_stage_to_progression_names(assignment.dig('data', 'srs_stage'))
         type = assignment.dig('data', 'subject_type')
         @distribution[stage][type] += 1
       end
